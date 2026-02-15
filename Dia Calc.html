@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diamond-Bot</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body { font-family: sans-serif; text-align: center; padding: 20px; }
+        .card { background: #f4f4f5; padding: 15px; border-radius: 10px; margin-top: 20px; text-align: left; }
+        input { width: 90%; padding: 12px; font-size: 18px; border: 2px solid #3390ec; border-radius: 8px; margin-bottom: 10px; }
+        .row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #ddd; }
+        .kyat { color: #3390ec; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <h2>💎 Diamond Calculator</h2>
+    <input type="number" id="baseInput" placeholder="Enter Base Number..." oninput="calculate()">
+
+    <div class="card">
+        <div class="row"><span>55 Diamonds</span> <span class="kyat" id="r1">0 Kyats</span></div>
+        <div class="row"><span>165 Diamonds</span> <span class="kyat" id="r2">0 Kyats</span></div>
+        <div class="row"><span>275 Diamonds</span> <span class="kyat" id="r3">0 Kyats</span></div>
+        <div class="row"><span>Weekly Pass</span> <span class="kyat" id="r4">0 Kyats</span></div>
+    </div>
+
+    <script>
+        // Start Telegram
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        tg.expand();
+
+        function calculate() {
+            const val = document.getElementById('baseInput').value;
+            const inputNum = parseFloat(val);
+            
+            if (!inputNum || inputNum <= 0) return;
+
+            // Simple math to avoid errors
+            const base = inputNum / 300;
+
+            document.getElementById('r1').innerText = Math.round(base * 39).toLocaleString() + " Kyats";
+            document.getElementById('r2').innerText = Math.round(base * 116).toLocaleString() + " Kyats";
+            document.getElementById('r3').innerText = Math.round(base * 187).toLocaleString() + " Kyats";
+            document.getElementById('r4').innerText = Math.round(base * 76).toLocaleString() + " Kyats";
+        }
+    </script>
+</body>
+</html>
